@@ -7,6 +7,123 @@
     <groupId>com.monster.lin</groupId>
     <artifactId>mvc-person-blog</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <!--Maven打包/构建方式：jar(默认),war,pom(什么都不会生成)-->
+    <packaging>war</packaging>
+
+    <!--配置中央仓库地址阿里镜像-->
+    <repositories>
+        <repository>
+            <id>maven-ali</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <!--依赖包管理-->
+    <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!--当Maven项目没有规定阶段时的默认值-->
+        <defaultGoal>package</defaultGoal>
+        <!--项目源码目录-->
+        <sourceDirectory>src/main/java/</sourceDirectory>
+        <!--项目单元测试的源码目录-->
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+
+        <!--项目相关资源的路径列表，比如配置文件和属性文件-->
+        <resources>
+            <!--resource表示包含的具体路径-->
+            <resource>
+                <directory>src/main/resources/commons</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/${env}</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <!--插件地址-->
+        <plugins>
+            <!--assembly插件可以实现自定义打包-->
+            <!--<plugin>-->
+                <!--<artifactId>maven-assembly-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<descriptors>-->
+                        <!--<descriptor>src/main/assembly/assembly.xml</descriptor>-->
+                    <!--</descriptors>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>make-assembly</id>-->
+                        <!--<phase>package</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>single</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
+            <plugin>
+                <!--只有webapp目录下的文件会被打包，maven依赖无法被打包-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <!--通过配置resource可以重新定义打包目录或者添加打包目录-->
+                    <!--<webResources>-->
+                        <!--<resource>-->
+                            <!--<directory>${project.basedir}/libs</directory>-->
+                            <!--<targetPath>webapp/WEB-INF/lib</targetPath>-->
+                            <!--<includes>-->
+                                <!--<include>**/*.jar</include>-->
+                            <!--</includes>-->
+                        <!--</resource>-->
+                    <!--</webResources>-->
+                    <!--插件会先生成本地目录，再打包成war包。该项表示生成的目录来源。-->
+                    <warSourceDirectory></warSourceDirectory>
+                    <!--web工程的构建目录，就是webContent-->
+                    <webappDirectory>true</webappDirectory>
+                    <!--
+                        表示是否将war包class打成jar包，放进lib中，class为空，默认为false。
+                        正常情况下war类型的工程，java代码编译后的类文件会放到WEB-INF/classes目录下面，散装。
+                        当该参数配置为true时，会将所有的class打包为一个jar，jar的名字与war的名字一致（除了后缀）。
+                        然后把这个jar放到WEB-INF/lib目录下，此时WEB-INF/classes目录下是空的。
+                    -->
+                    <attachClasses>true</attachClasses>
+                    <!--
+                        表示在打包成war包后，是否同时将class打包成jar包，war包结构不变。
+                        正常情况下war类型的工程，当我们执行install或者deploy的时候build出一个war包，安装到本地或者发布到远程。
+                        当该参数配置为true时，除了war包外还会多出一个jar包，不过该jar包的classifier默认为classes。
+                    -->
+                    <archiveClasses>true</archiveClasses>
+                    <!--表示打包成war包排除的内容-->
+                    <!--<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>-->
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
 
 
 </project>
