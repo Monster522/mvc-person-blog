@@ -26,14 +26,73 @@
         </repository>
     </repositories>
 
+    <properties>
+        <spring.version>4.3.20.RELEASE</spring.version>
+    </properties>
+
+
     <!--依赖包管理-->
     <dependencies>
+        <!--Servlet-API不能加入打包，因为容器里面会冲突-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+
+        <!--Spring核心依赖包-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!--Spring整合第三方orm框架的实现 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Spring程序日志打印以及日志门面接口 -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <!-- spring用来提供web应用的支持包 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- springMVC框架的核心包 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- FastJson格式包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.49</version>
+        </dependency>
+
+        <!-- Valid数据验证，Hibernate实现 -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.13.Final</version>
+        </dependency>
+
+
+
+
     </dependencies>
 
     <build>
@@ -103,7 +162,7 @@
                     <!--插件会先生成本地目录，再打包成war包。该项表示生成的目录来源。-->
                     <warSourceDirectory></warSourceDirectory>
                     <!--web工程的构建目录，就是webContent-->
-                    <webappDirectory>true</webappDirectory>
+                    <!--<webappDirectory></webappDirectory>-->
                     <!--
                         表示是否将war包class打成jar包，放进lib中，class为空，默认为false。
                         正常情况下war类型的工程，java代码编译后的类文件会放到WEB-INF/classes目录下面，散装。

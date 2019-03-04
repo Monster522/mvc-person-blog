@@ -3,32 +3,85 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
-    <!--配置URL和Servlet的映射关系-->
-    <servlet-mapping>
-        <servlet-name>mouth</servlet-name>
-        <url-pattern>/mouth</url-pattern>
-    </servlet-mapping>
+    <!-- 配置上下文参数，使用注解配置方式-->
+    <!--<context-param>-->
+        <!--<param-name>contextClass</param-name>-->
+        <!--<param-value>-->
+            <!--org.springframework.web.context.support.AnnotationConfigWebApplicationContext-->
+        <!--</param-value>-->
+    <!--</context-param>-->
 
-    <!--将实际类注册成一个Servlet-->
+
+    <!-- 配置DispatcherServlet，中央处理器 -->
     <servlet>
-        <servlet-name>mouth</servlet-name>
-        <servlet-class>com.monster.lin.mvc.person.blog.TestServlet</servlet-class>
-        <!--servlet启动参数-->
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+        <!-- 配置DispatcherServlet的一个初始化参数，作用是配置SpringMVC配置文件的位置和名称 -->
         <init-param>
-            <param-name>name</param-name>
-            <param-value>jackMa</param-value>
+            <param-name>contextConfigLocation</param-name>
+            <!--classpath：只会到你的class路径中查找找文件;-->
+            <!--classpath*：不仅包含class路径，还包括jar文件中(class路径)进行查找.-->
+            <!--<param-value>classpath:spring-mvc.xml,classpath*:spring-mvc.xml</param-value>-->
+            <param-value>classpath*:spring-mvc.xml</param-value>
         </init-param>
+
+
+        <!-- 设置初始化参数 -->
+        <!-- 指定使用配置类 配置java的方式  -->
+        <!--<init-param>-->
+            <!--<param-name>contextClass</param-name>-->
+            <!--<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>-->
+        <!--</init-param>-->
+
+        <!-- 指定配置类所在位置 -->
+        <!--<init-param>-->
+            <!--<param-name>contextConfigLocation</param-name>-->
+            <!--<param-value>com.monster.lin.mvc.person.blog.conf.InteceptorConf</param-value>-->
+        <!--</init-param>-->
+
+
+        <!-- load-on-startup 表示在web应用启动时，即加载该DispatcherServlet，而不是等到首次请求再中载 -->
+        <load-on-startup>1</load-on-startup>
     </servlet>
 
+
+    <servlet-mapping>
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <!-- 拦截后缀为 .jsp请求的url 或所有类型的文件，跳转到spmvc-servlet.xml进行解析 -->
+        <!-- 把  *.jsp  改成  / 后，表示默认的servlet为DispatcherServlet，如果不改则表示index，jsp为要处理是servlet-->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+
+    <!--配置URL和Servlet的映射关系-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>mouth</servlet-name>-->
+        <!--<url-pattern>/mouth</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--将实际类注册成一个Servlet-->
+    <!--<servlet>-->
+        <!--<servlet-name>mouth</servlet-name>-->
+        <!--<servlet-class>com.monster.lin.mvc.person.blog.TestServlet</servlet-class>-->
+        <!--&lt;!&ndash;servlet启动参数&ndash;&gt;-->
+        <!--<init-param>-->
+            <!--<param-name>name</param-name>-->
+            <!--<param-value>jackMa</param-value>-->
+        <!--</init-param>-->
+    <!--</servlet>-->
+
     <!--注册监听器-->
-    <listener>
-        <description>noseListener</description>
-        <listener-class>com.monster.lin.mvc.person.blog.listener.ContentListener</listener-class>
-    </listener>
+    <!--<listener>-->
+        <!--<description>noseListener</description>-->
+        <!--<listener-class>com.monster.lin.mvc.person.blog.listener.ContentListener</listener-class>-->
+    <!--</listener>-->
 
     <!--&lt;!&ndash;注册过滤器&ndash;&gt;-->
     <!--<filter>-->

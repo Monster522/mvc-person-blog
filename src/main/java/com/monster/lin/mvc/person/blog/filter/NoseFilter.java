@@ -1,6 +1,7 @@
 package com.monster.lin.mvc.person.blog.filter;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.io.IOException;
  * @version 2019/1/31
  * @since JDK 1.8
  */
-//@WebFilter(filterName = "eyes",urlPatterns = "/*")
+@WebFilter(filterName = "eyes",urlPatterns = "/xiaomi")
 public class NoseFilter implements Filter {
     //初始化
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -25,7 +26,7 @@ public class NoseFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse)response;
 
         System.out.println("进入处理...");
-        String username = httpServletRequest.getParameter("user");
+        String username = "jackMa";
 
         if(username.equals("jackMa")) {
             System.out.println("这是杰克马");

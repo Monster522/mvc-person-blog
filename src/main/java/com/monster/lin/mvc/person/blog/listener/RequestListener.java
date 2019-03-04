@@ -11,15 +11,15 @@ import javax.servlet.annotation.WebListener;
  * @version 2019/1/30
  * @since JDK 1.8
  */
-@WebListener
-public class RequestListener implements ServletRequestListener {
-    //请求创建
-    public void requestInitialized(ServletRequestEvent sre) {
-        System.out.println(sre.getServletRequest() + "创建了！");
-    }
-
-    //请求销毁
-    public void requestDestroyed(ServletRequestEvent sre) {
-        System.out.println(sre.getServletRequest() + "销毁了！");
-    }
-}
+//@WebListener
+//public class RequestListener implements ServletRequestListener {
+//    //请求创建
+//    public void requestInitialized(ServletRequestEvent sre) {
+//        System.out.println(sre.getServletRequest() + "创建了！");
+//    }
+//
+//    //请求销毁
+//    public void requestDestroyed(ServletRequestEvent sre) {
+//        System.out.println(sre.getServletRequest() + "销毁了！");
+//    }
+//}

@@ -11,15 +11,15 @@ import javax.servlet.http.HttpSessionListener;
  * @version 2019/1/30
  * @since JDK 1.8
  */
-@WebListener
-public class SessionListener implements HttpSessionListener {
-    //创建session
-    public void sessionCreated(HttpSessionEvent se) {
-        System.out.println("Session创建！" + se.getSession().getCreationTime());
-    }
-
-    //销毁session
-    public void sessionDestroyed(HttpSessionEvent se) {
-        System.out.println("Session销毁！" + se.getSession().getCreationTime());
-    }
-}
+//@WebListener
+//public class SessionListener implements HttpSessionListener {
+//    //创建session
+//    public void sessionCreated(HttpSessionEvent se) {
+//        System.out.println("Session创建！" + se.getSession().getCreationTime());
+//    }
+//
+//    //销毁session
+//    public void sessionDestroyed(HttpSessionEvent se) {
+//        System.out.println("Session销毁！" + se.getSession().getCreationTime());
+//    }
+//}

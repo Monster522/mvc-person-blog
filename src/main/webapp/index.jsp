@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>亚洲杯</title>
+    <title>360度阿姆斯特朗回旋标题</title>
 </head>
 <body>
-    <h2>中国vs伊朗</h2>
+    <a href="rove">点击这里去流浪...</a>
 </body>
 </html>
